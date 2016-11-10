@@ -1,0 +1,57 @@
+<div class="row" ng-app="AngulaRails" ng-controller="TacoOrderController">
+  <div class ="col-mod-6">
+    <h3> Add Taco to order</h3>
+    <form ng-submit="addTaco()">
+      <div class="form-group">
+        <label for="name">Name your creation</label>
+        <input type="text" name="name" class="form-control" placeholder="Super Tasy" ng-model="taco.name"/>
+      </div>
+      <div class="form-group">
+        <label for="filling"></label>
+        <select ng-model="taco.filing" class="form-control" ng-options="f for f in fillings">
+          <!-- Declared in controller-->
+          <option value="">Pick a filling</option>
+          <!--<option>Beef</option>-->
+          <!--<option>Chicken</option>-->
+          <!--<option>Fish</option><option></option>-->
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Extras</label>
+        <div class="checkbox" ng-repeat="extra in extras">
+          <label>
+            <input type="checkbox" ng-model="extra.checked"/>
+            {{ extra.name }}
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Cheese</label>
+        <div class="radio" ng-repeat="cheese in cheeses">
+          <label>
+            <input type="radio" value="{{ cheese }}" ng-model="taco.cheese" />
+            {{ cheese }}
+          </label>
+        </div>
+      </div>
+      <button class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  <div class="col-mod-6">
+    <h3>Your Order</h3>
+    <table class="table">
+      <tbody>
+        <tr ng-repeat="taco in tacos">
+          <td> {{ taco.name }} </td>
+          <td> {{ taco.filing }} </td>
+          <td>
+            <span ng-repeat="extra in taco.extras">
+              {{ extra }}
+            </span>
+          </td>
+          <td> {{ taco.cheese }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
